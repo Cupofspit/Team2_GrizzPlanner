@@ -3,6 +3,7 @@ package grizzplanner;
 
 
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 public class GrizzPlanner extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -34,6 +35,10 @@ public class GrizzPlanner extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        Traffic test = new Traffic("House", "House");
+        test.connect();
+        test.getCoords();
     }
     
 

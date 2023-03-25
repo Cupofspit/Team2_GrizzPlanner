@@ -26,7 +26,7 @@ public class Traffic {
         
     }
     
-    public void connect() throws MalformedURLException, IOException{
+    public String connect() throws MalformedURLException, IOException{
         String link = "https://api.tomtom.com/routing/1/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?key=";
         link = link + key;
         URL url = new URL(link);
@@ -48,6 +48,8 @@ public class Traffic {
         //URI uri = url.toURI();
         http.disconnect();
         
+        return text;
+        
         //can add arrive at header to get reccomendation on when to depart
         //will have to implement another api call to get location > coords
        
@@ -57,7 +59,17 @@ public class Traffic {
     //https://www.baeldung.com/java-http-request for http request in java 8
     //https://reqbin.com/ api call code
     
-    public void getCoords() throws MalformedURLException{
+    public void getCoords() throws MalformedURLException, IOException{
         URL url2 = new URL("https://api.tomtom.com/search/2/geocode/14530,HopeDrive,SterlingHeights,Michigan,UnitedStates.json?key=n5NcANxpS9cGU6R7PiANGgMeJWTw4625");
+        HttpURLConnection http = (HttpURLConnection)url2.openConnection();
+                InputStream in;
+        in = http.getInputStream();
+        String text = new BufferedReader(
+            new InputStreamReader(in, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n"));
+        System.out.println(text);   
+        System.out.println("Test");
+        http.disconnect();
     }
 }
