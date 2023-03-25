@@ -17,8 +17,18 @@ import java.util.stream.Collectors;
 public class Traffic {
     private String key = "n5NcANxpS9cGU6R7PiANGgMeJWTw4625";
     
-    public static void main(String[] args) throws MalformedURLException, IOException{
-        String link = "https://api.tomtom.com/routing/1/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?key=n5NcANxpS9cGU6R7PiANGgMeJWTw4625";
+    private String start;
+    private String dest;
+    
+    public Traffic(String location, String destination){
+        start = location;
+        dest = destination;
+        
+    }
+    
+    public void connect() throws MalformedURLException, IOException{
+        String link = "https://api.tomtom.com/routing/1/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?key=";
+        link = link + key;
         URL url = new URL(link);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
         //System.out.println("Content: " + url.getContent());
@@ -37,9 +47,17 @@ public class Traffic {
         System.out.println("Test");
         //URI uri = url.toURI();
         http.disconnect();
+        
+        //can add arrive at header to get reccomendation on when to depart
+        //will have to implement another api call to get location > coords
        
     }
      //https://www.baeldung.com/convert-input-stream-to-string for inputstream
     //https://developer.tomtom.com/routing-api/documentation/routing/calculate-route for api documentation
     //https://www.baeldung.com/java-http-request for http request in java 8
+    //https://reqbin.com/ api call code
+    
+    public void getCoords() throws MalformedURLException{
+        URL url2 = new URL("https://api.tomtom.com/search/2/geocode/14530,HopeDrive,SterlingHeights,Michigan,UnitedStates.json?key=n5NcANxpS9cGU6R7PiANGgMeJWTw4625");
+    }
 }
