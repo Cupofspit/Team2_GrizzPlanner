@@ -1,4 +1,4 @@
-package studentplanner;
+/*package studentplanner;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -80,3 +80,4 @@ public class StudentPlanner extends Application {
     }
     
 }
+*/
