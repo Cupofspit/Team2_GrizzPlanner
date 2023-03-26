@@ -30,7 +30,17 @@ public class GrizzPlanner extends Application {
                 System.out.println("Hello World!");
             }
         });
-        
+        Traffic traffic = new Traffic();
+
+        // Create a VBox to hold parking lot information
+        //VBox parkingLotBox = new VBox();
+        //for (ParkingLot lot : traffic.getParkingLots()) {
+            //Label nameLabel = new Label(lot.getName());
+            //Label capacityLabel = new Label("Capacity: " + lot.getCapacity());
+            //Label availabilityLabel = new Label("Availability: " + lot.getAvailability());
+
+        parkingLotBox.getChildren().addAll(nameLabel, capacityLabel, availabilityLabel);
+    }
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         
