@@ -18,37 +18,47 @@ public class Traffic {
     private String key = "n5NcANxpS9cGU6R7PiANGgMeJWTw4625";
     
     private String start;
-    private String dest;
+    public int address;
+    public String street;
+    public String city;
+    public String state;
     
-    public Traffic(String location, String destination){
-        start = location;
-        dest = destination;
-        
+    public Traffic(int address, String street, String city, String state) throws IOException{
+        start = address + "," + street + "," + city + "," + state;
+        start = start.replaceAll("\\s", "");
+        locateCoords(start);
     }
     
-    public String connect() throws MalformedURLException, IOException{
-        String link = "https://api.tomtom.com/routing/1/calculateRoute/52.50931,13.42936:52.50274,13.43872/json?key=";
-        link = link + key;
+    public int findDriveTime() throws MalformedURLException, IOException{
+        String link = "";
+        link = "https://api.tomtom.com/routing/1/calculateRoute/42.60247,-82.9802:42.6679,-83.2082/json?key=" + key;
         URL url = new URL(link);
         HttpURLConnection http = (HttpURLConnection)url.openConnection();
-        //System.out.println("Content: " + url.getContent());
-        //System.out.println(http.getResponseCode() + " " + http.getResponseMessage());
-        //System.out.println(http.getContentLength() + "");
-        //System.out.println("Test");
-        //System.out.println(http.getContent());
         InputStream in;
         in = http.getInputStream();
         String text = new BufferedReader(
             new InputStreamReader(in, StandardCharsets.UTF_8))
                 .lines()
                 .collect(Collectors.joining("\n"));
-        System.out.println(text);
-        //System.out.println("Length: " + http.getContentLength() + "");     
-        System.out.println("Test");
-        //URI uri = url.toURI();
+        System.out.println(text);    
         http.disconnect();
         
-        return text;
+        int intIndex = text.indexOf("travelTimeInSeconds");
+        int endIndex = text.indexOf(",\"trafficDelayInSeconds\"");
+        
+        System.out.println(intIndex);
+        
+        text = (String) text.subSequence(intIndex, endIndex);
+        
+        System.out.println(text);
+        
+        String[] splits = text.split(":");
+        String time = splits[1];
+        System.out.println(time + "In Seconds");
+        int min = Integer.parseInt(time);
+        min = (int) Math.ceil(min/60);
+        System.out.println(min);
+        return min;
         
         //can add arrive at header to get reccomendation on when to depart
         //will have to implement another api call to get location > coords
@@ -58,9 +68,14 @@ public class Traffic {
     //https://developer.tomtom.com/routing-api/documentation/routing/calculate-route for api documentation
     //https://www.baeldung.com/java-http-request for http request in java 8
     //https://reqbin.com/ api call code
+    //https://www.tutorialspoint.com/javaexamples/string_search.htm for parsing string
+    //https://www.geeksforgeeks.org/how-to-remove-all-white-spaces-from-a-string-in-java/ for the replace
     
-    public void getCoords() throws MalformedURLException, IOException{
-        URL url2 = new URL("https://api.tomtom.com/search/2/geocode/14530,HopeDrive,SterlingHeights,Michigan,UnitedStates.json?key=n5NcANxpS9cGU6R7PiANGgMeJWTw4625");
+    public void locateCoords(String addr) throws MalformedURLException, IOException{
+        String link = "";
+        link = "https://api.tomtom.com/search/2/geocode/" + addr + ",UnitedStates.json?key=" + key;
+        System.out.println(link);
+        URL url2 = new URL(link);
         HttpURLConnection http = (HttpURLConnection)url2.openConnection();
                 InputStream in;
         in = http.getInputStream();
@@ -73,3 +88,8 @@ public class Traffic {
         http.disconnect();
     }
 }
+
+//need to split out urls, make them customizable
+//update constructor for address, use get coords to get coordinates
+//add gets and sets
+//pass through methods

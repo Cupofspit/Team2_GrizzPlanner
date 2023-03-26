@@ -36,9 +36,8 @@ public class GrizzPlanner extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        Traffic test = new Traffic("House", "House");
-        test.connect();
-        test.getCoords();
+        Traffic test = new Traffic(14530, "Hope Drive","Sterling Heights", "Michigan");
+        //test.findDriveTime();
     }
     
 
