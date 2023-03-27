@@ -10,52 +10,54 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.List;
+import java.util.ArrayList;
+import grizzplanner.Traffic;
+import grizzplanner.ParkingLot;
 
-/**
- *
- * @author 15866
- */
+
 public class GrizzPlanner extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
             }
         });
+
         Traffic traffic = new Traffic();
 
-        // Create a VBox to hold parking lot information
-        //VBox parkingLotBox = new VBox();
-        //for (ParkingLot lot : traffic.getParkingLots()) {
-            //Label nameLabel = new Label(lot.getName());
-            //Label capacityLabel = new Label("Capacity: " + lot.getCapacity());
-            //Label availabilityLabel = new Label("Availability: " + lot.getAvailability());
+        VBox parkingLotBox = new VBox();
 
-        parkingLotBox.getChildren().addAll(nameLabel, capacityLabel, availabilityLabel);
-    }
+        for (ParkingLot lot : traffic.getParkingLots()) {
+            Label nameLabel = new Label(lot.getName());
+            Label capacityLabel = new Label("Capacity: " + lot.getCapacity());
+            Label availabilityLabel = new Label("Availability: " + lot.getAvailability());
+
+            parkingLotBox.getChildren().addAll(nameLabel, capacityLabel, availabilityLabel);
+        }
+
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
+        root.getChildren().addAll(btn, parkingLotBox);
+
         Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+
+        primaryStage.setTitle("GrizzPlanner");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
