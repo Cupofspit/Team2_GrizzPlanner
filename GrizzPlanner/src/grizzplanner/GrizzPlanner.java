@@ -11,7 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
 
 public class GrizzPlanner extends Application {
     
@@ -27,10 +28,10 @@ public class GrizzPlanner extends Application {
             }
         });
         
-        StackPane root = new StackPane();
+        VBox root = FXMLLoader.load(getClass().getResource("PlannerView.fxml"));
         root.getChildren().add(btn);
         
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
