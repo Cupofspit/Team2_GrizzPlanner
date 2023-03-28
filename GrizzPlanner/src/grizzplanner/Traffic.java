@@ -11,6 +11,8 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -24,6 +26,7 @@ public class Traffic {
     public String state;
     public String xCoord;
     public String yCoord;
+    private List<ParkingLot> parkingLots;
     
     public Traffic(int address, String street, String city, String state) throws IOException{
         start = address + "," + street + "," + city + "," + state;
@@ -34,6 +37,19 @@ public class Traffic {
         this.state = state;
         xCoord = locateXCoords(start);
         yCoord = locateYCoords(start);
+        
+        //Ashton
+        ParkingLot lot1 = new ParkingLot("Lot 1", 100, 80);
+        ParkingLot lot2 = new ParkingLot("Lot 2", 150, 120);
+        ParkingLot lot3 = new ParkingLot("Lot 3", 200, 180);
+        ParkingLot lot4 = new ParkingLot("Lot 4", 250, 200);
+
+        parkingLots = new ArrayList<>();
+        parkingLots.add(lot1);
+        parkingLots.add(lot2);
+        parkingLots.add(lot3);
+        parkingLots.add(lot4);
+        
     }
     
     public int findDriveTime() throws MalformedURLException, IOException{
@@ -130,6 +146,9 @@ public class Traffic {
         System.out.println(y + " lon");        
         
         return y;
+    }
+        public List<ParkingLot> getParkingLots() {
+        return parkingLots;
     }
 }
 
