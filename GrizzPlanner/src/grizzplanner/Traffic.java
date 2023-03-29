@@ -150,6 +150,10 @@ public class Traffic {
         public List<ParkingLot> getParkingLots() {
         return parkingLots;
     }
+
+    public String getStart(){
+        return this.start;
+    }
 }
 
 //need to split out urls, make them customizable

@@ -19,17 +19,19 @@ public class Calendar {
         events = new ArrayList<>();
     }
     
-    public void viewEvent(int eventId) {
+    public String viewEvent(int eventId) {
         for (Event event : events) {
             if (event.getId() == eventId) {
                 System.out.println("Event ID: " + event.getId());
                 System.out.println("Event Name: " + event.getName());
                 System.out.println("Event Date: " + event.getDate());
                 System.out.println("Event Description: " + event.getDescription());
-                return;
+                String output = "Event ID: "+ event.getId()+"\nEvent Name: "+event.getName()+"\nEvent Date: "+event.getDate()+"\nEvent Description: "+event.getDescription()+"\n";
+                return output;
             }
         }
         System.out.println("Event not found!");
+        return "Event not found!";
     }
     
     public void deleteEvent(int eventId) {
@@ -76,7 +78,7 @@ public class Calendar {
         return events;
     }
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Calendar calendar = new Calendar();
         calendar.addEvent();
         calendar.addEvent();
@@ -84,5 +86,5 @@ public class Calendar {
         calendar.updateEvent(1, "Updated Event Name", "2023-03-28", "Updated Event Description");
         calendar.viewEvent(1);
         calendar.deleteEvent(2);
-    }
+    }*/
 }
