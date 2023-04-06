@@ -45,4 +45,9 @@ class Event {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Event{" + "id=" + id + ", name=" + name + ", date=" + date + ", description=" + description + '}';
+    }
 }

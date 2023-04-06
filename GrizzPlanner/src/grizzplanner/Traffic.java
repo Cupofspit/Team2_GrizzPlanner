@@ -51,7 +51,7 @@ public class Traffic {
         parkingLots.add(lot4);
         
     }
-    
+     
     public int findDriveTime() throws MalformedURLException, IOException{
         String link = "";
         link = "https://api.tomtom.com/routing/1/calculateRoute/" + xCoord + "," + yCoord + ":42.6679,-83.2082/json?key=" + key;
@@ -150,6 +150,55 @@ public class Traffic {
         public List<ParkingLot> getParkingLots() {
         return parkingLots;
     }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public void setAddress(int address) {
+        this.address = address;
+        setStart();
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+        setStart();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+        setStart();
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+        setStart();
+    }
+
+    public String getxCoord() {
+        return xCoord;
+    }
+
+    public String getyCoord() {
+        return yCoord;
+    }
+    
+    private void setStart(){
+        start = address + "," + street + "," + city + "," + state;
+    }
+        
 }
 
 //need to split out urls, make them customizable
