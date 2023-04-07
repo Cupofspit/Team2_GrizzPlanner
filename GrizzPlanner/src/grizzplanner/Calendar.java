@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author 15866
@@ -28,8 +31,13 @@ import java.util.Scanner;
 public class Calendar {
     private List<Event> events;
     
-    public Calendar() {
+    public Calendar() throws IOException {
         events = new ArrayList<>();
+        try {
+            pull();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Could not pull event data");;
+        }
     }
     
     public void viewEvent(int eventId) {
@@ -45,19 +53,20 @@ public class Calendar {
         System.out.println("Event not found!");
     }
     
-    public void deleteEvent(int eventId) {
+    public void deleteEvent(int eventId) throws IOException {
         for (int i = 0; i < events.size(); i++) {
             Event event = events.get(i);
             if (event.getId() == eventId) {
                 events.remove(i);
                 System.out.println("Event deleted!");
+                save();
                 return;
             }
         }
         System.out.println("Event not found!");
     }
     
-    public void updateEvent(int eventId, String name, String date, String description) {
+    public void updateEvent(int eventId, String name, String date, String description) throws IOException {
         for (int i = 0; i < events.size(); i++) {
             Event event = events.get(i);
             if (event.getId() == eventId) {
@@ -65,6 +74,7 @@ public class Calendar {
                 event.setDate(date);
                 event.setDescription(description);
                 System.out.println("Event updated!");
+                save();
                 return;
             }
         }
@@ -91,15 +101,56 @@ public class Calendar {
         File file = new  File(output);
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         for (Event temp: getEvents()){
-            writer.write(temp.toString());
+            writer.write(temp.toString() + "\n");
         }
         writer.close();
     }
+    
     
     public List<Event> getEvents() {
         return events;
     }
     
+    private void pull() throws FileNotFoundException, IOException{
+        String input = "./save.txt";
+        File file = new File(input);
+        InputStream inputStream = new FileInputStream(file);
+        InputStreamReader isReader = new InputStreamReader(inputStream);
+        BufferedReader reader = new BufferedReader(isReader);
+        
+        String str;
+        int id = 0;
+        String name = "";
+        String date = "";
+        String description = "";
+        
+        Event add;
+        
+        while((str = reader.readLine())!= null){
+           String[] split1 = str.split(",");
+            for(String temp: split1){
+//                System.out.println(temp);
+                String[] split2 = temp.split("=");   
+                switch(split2[0].trim()){
+                    case "id" :
+                        id = Integer.parseInt(split2[1]);
+                        break;
+                    case "name" :
+                        name = split2[1];
+                        break;
+                    case "date" :
+                        date = split2[1];
+                        break;
+                    case "description" :
+                        description = split2[1];
+                        break;
+                }
+            }
+            add = new Event(id, name, date, description);
+            events.add(add);
+//               System.out.println(str);
+        }
+    }
 //    public static void main(String[] args) throws IOException {
 //        Calendar calendar = new Calendar();
 //        calendar.addEvent();

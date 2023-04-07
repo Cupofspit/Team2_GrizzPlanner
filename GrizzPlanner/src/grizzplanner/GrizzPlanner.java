@@ -23,6 +23,13 @@ public class GrizzPlanner extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        Calendar cal = new Calendar();
+//       cal.addEvent();
+//        cal.addEvent();
+//        for(Event temp: cal.getEvents()){
+//            System.out.println(temp.toString());
+//        }
+//        cal.deleteEvent(1);
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
