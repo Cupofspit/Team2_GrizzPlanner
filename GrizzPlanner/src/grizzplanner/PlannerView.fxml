@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="596.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" />
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New Schedule" />
+                        <MenuItem mnemonicParsing="false" text="Open Schedule" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Save Schedule" />
+                        <MenuItem mnemonicParsing="false" text="Save Schedule As…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" />
+                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Cut" />
+                        <MenuItem mnemonicParsing="false" text="Copy" />
+                        <MenuItem mnemonicParsing="false" text="Paste" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Select All" />
+                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About GrizzPlanner" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="501.0" prefWidth="819.0" VBox.vgrow="ALWAYS">
+            <children>
+                <TabPane prefHeight="564.0" prefWidth="920.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Events">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="948.0">
+                                    <children>
+                                        <DatePicker layoutX="14.0" layoutY="253.0" prefHeight="32.0" prefWidth="275.0" />
+                                        <TableView layoutX="326.0" layoutY="52.0" prefHeight="442.0" prefWidth="576.0">
+                                            <columns>
+                                                <TableColumn prefWidth="189.0" text="Event Name" />
+                                                <TableColumn minWidth="0.0" prefWidth="75.0" text="Date" />
+                                                <TableColumn prefWidth="98.0" text="Start Time" />
+                                                <TableColumn prefWidth="98.0" text="End Time" />
+                                                <TableColumn prefWidth="115.0" text="Event ID" />
+                                            </columns>
+                                        </TableView>
+                                        <ChoiceBox layoutX="14.0" layoutY="327.0" prefHeight="31.0" prefWidth="100.0" />
+                                        <ChoiceBox layoutX="124.0" layoutY="327.0" prefHeight="31.0" prefWidth="100.0" />
+                                        <ChoiceBox layoutX="239.0" layoutY="327.0" prefHeight="31.0" prefWidth="50.0" />
+                                        <Separator layoutX="14.0" layoutY="210.0" prefHeight="18.0" prefWidth="275.0" />
+                                        <Label layoutX="14.0" layoutY="189.0" prefHeight="21.0" prefWidth="74.0" text="Add Event" />
+                                        <ChoiceBox layoutX="14.0" layoutY="399.0" prefHeight="31.0" prefWidth="100.0" />
+                                        <ChoiceBox layoutX="124.0" layoutY="399.0" prefHeight="31.0" prefWidth="100.0" />
+                                        <ChoiceBox layoutX="239.0" layoutY="399.0" prefHeight="31.0" prefWidth="50.0" />
+                                        <Label layoutX="14.0" layoutY="228.0" prefHeight="21.0" prefWidth="45.0" text="Date" />
+                                        <Button layoutX="240.0" layoutY="463.0" mnemonicParsing="false" text="Add" />
+                                        <TextField layoutX="14.0" layoutY="463.0" prefHeight="31.0" prefWidth="194.0" />
+                                        <Label layoutX="14.0" layoutY="300.0" text="Start Time" />
+                                        <Label layoutX="14.0" layoutY="372.0" text="End Time" />
+                                        <Label layoutX="14.0" layoutY="442.0" text="Event Name" />
+                                        <Label layoutX="326.0" layoutY="14.0" prefHeight="32.0" prefWidth="268.0" text="Events currently on this schedule:">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Traffic">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="About">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </AnchorPane>
+        <VBox prefHeight="200.0" prefWidth="100.0" />
+    </children>
+</VBox>
