@@ -5,21 +5,28 @@ package grizzplanner;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
-import java.util.List;
-import java.util.ArrayList;
 
 
-public class GrizzPlanner extends Application {
+public class GrizzPlanner extends Application{
+
+    //@FXML ChoiceBox<String> startTimeHour;
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -30,24 +37,37 @@ public class GrizzPlanner extends Application {
 //            System.out.println(temp.toString());
 //        }
 //        cal.deleteEvent(1);
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
+
+
+
+
+/*        //define lists used in choiceBoxes
+        startTimeHour = new ChoiceBox<>();
+        List<String> hourList = new ArrayList<String>();
+        for(int i = 0; i<12; i++){
+            hourList.add((i+1)+"");
+        }
+        ObservableList<String> hourListObs = FXCollections.observableList(hourList);
+
+        startTimeHour.setItems(hourListObs);
+
+        if(startTimeHour != null){
+            startTimeHour.setItems(hourListObs);
+        }*/
+
+
         VBox root = FXMLLoader.load(getClass().getResource("PlannerView.fxml"));
-        root.getChildren().add(btn);
+
+
+
+        //root.getChildren().add(btn);
         
         Scene scene = new Scene(root);
         
         primaryStage.setTitle("Hello World!");
 
-        Traffic test = new Traffic(316, "Paragon","Troy", "Michigan");
+ /*       Traffic test = new Traffic(316, "Paragon","Troy", "Michigan");
         test.findDriveTime();
 
         VBox parkingLotBox = new VBox();
@@ -62,7 +82,7 @@ public class GrizzPlanner extends Application {
 
         //StackPane root = new StackPane();
         root.getChildren().addAll(parkingLotBox);
-
+*/
         primaryStage.setTitle("GrizzPlanner");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -74,5 +94,4 @@ public class GrizzPlanner extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

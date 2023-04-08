@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package grizzplanner;
 
 import java.awt.FileDialog;
@@ -33,24 +29,26 @@ public class Calendar {
     
     public Calendar() throws IOException {
         events = new ArrayList<>();
-        try {
-            pull();
-        } catch (FileNotFoundException ex) {
-            System.out.println("Could not pull event data");;
-        }
+//        try {
+//            pull();
+//        } catch (FileNotFoundException ex) {
+//            System.out.println("Could not pull event data");;
+//        }
     }
     
-    public void viewEvent(int eventId) {
+    public String viewEvent(int eventId) {
         for (Event event : events) {
             if (event.getId() == eventId) {
                 System.out.println("Event ID: " + event.getId());
                 System.out.println("Event Name: " + event.getName());
                 System.out.println("Event Date: " + event.getDate());
                 System.out.println("Event Description: " + event.getDescription());
-                return;
+                String output = "Event ID: "+ event.getId()+"\nEvent Name: "+event.getName()+"\nEvent Date: "+event.getDate()+"\nEvent Description: "+event.getDescription()+"\n";
+                return output;
             }
         }
         System.out.println("Event not found!");
+        return "Event not found!";
     }
     
     public void deleteEvent(int eventId) throws IOException {
@@ -111,46 +109,46 @@ public class Calendar {
         return events;
     }
     
-    private void pull() throws FileNotFoundException, IOException{
-        String input = "./save.txt";
-        File file = new File(input);
-        InputStream inputStream = new FileInputStream(file);
-        InputStreamReader isReader = new InputStreamReader(inputStream);
-        BufferedReader reader = new BufferedReader(isReader);
-        
-        String str;
-        int id = 0;
-        String name = "";
-        String date = "";
-        String description = "";
-        
-        Event add;
-        
-        while((str = reader.readLine())!= null){
-           String[] split1 = str.split(",");
-            for(String temp: split1){
-//                System.out.println(temp);
-                String[] split2 = temp.split("=");   
-                switch(split2[0].trim()){
-                    case "id" :
-                        id = Integer.parseInt(split2[1]);
-                        break;
-                    case "name" :
-                        name = split2[1];
-                        break;
-                    case "date" :
-                        date = split2[1];
-                        break;
-                    case "description" :
-                        description = split2[1];
-                        break;
-                }
-            }
-            add = new Event(id, name, date, description);
-            events.add(add);
-//               System.out.println(str);
-        }
-    }
+//    private void pull() throws FileNotFoundException, IOException{
+//        String input = "./save.txt";
+//        File file = new File(input);
+//        InputStream inputStream = new FileInputStream(file);
+//        InputStreamReader isReader = new InputStreamReader(inputStream);
+//        BufferedReader reader = new BufferedReader(isReader);
+//        
+//        String str;
+//        int id = 0;
+//        String name = "";
+//        String date = "";
+//        String description = "";
+//        
+//        Event add;
+//        
+//        while((str = reader.readLine())!= null){
+//           String[] split1 = str.split(",");
+//            for(String temp: split1){
+////                System.out.println(temp);
+//                String[] split2 = temp.split("=");   
+//                switch(split2[0].trim()){
+//                    case "id" :
+//                        id = Integer.parseInt(split2[1]);
+//                        break;
+//                    case "name" :
+//                        name = split2[1];
+//                        break;
+//                    case "date" :
+//                        date = split2[1];
+//                        break;
+//                    case "description" :
+//                        description = split2[1];
+//                        break;
+//                }
+//            }
+//            add = new Event(id, name, date, description);
+//            events.add(add);
+////               System.out.println(str);
+//        }
+//    }
 //    public static void main(String[] args) throws IOException {
 //        Calendar calendar = new Calendar();
 //        calendar.addEvent();
@@ -160,4 +158,15 @@ public class Calendar {
 //        calendar.viewEvent(1);
 //        calendar.deleteEvent(2);
 //    }
+
+    /*public static void main(String[] args) {
+        Calendar calendar = new Calendar();
+        calendar.addEvent();
+        calendar.addEvent();
+        calendar.viewEvent(1);
+        calendar.updateEvent(1, "Updated Event Name", "2023-03-28", "Updated Event Description");
+        calendar.viewEvent(1);
+        calendar.deleteEvent(2);
+    }*/
+
 }

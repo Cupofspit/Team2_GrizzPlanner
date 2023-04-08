@@ -199,6 +199,10 @@ public class Traffic {
         start = address + "," + street + "," + city + "," + state;
     }
         
+    public String getStart(){
+        return this.start;
+    }
+
 }
 
 //need to split out urls, make them customizable
