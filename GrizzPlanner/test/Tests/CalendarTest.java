@@ -2,28 +2,29 @@ package Tests;
 
 import grizzplanner.Calendar;
 import grizzplanner.Event;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.Assert.assertEquals;
 
-class CalendarTest {
+import org.junit.Test;
+import org.junit.*;
+import static org.junit.Assert.*;
+
+//import static org.junit.jupiter.api.Assertions.*;
+
+public class CalendarTest {
     private Calendar calendar;
 
-    @BeforeEach
-    void setUp() {
-        calendar = new Calendar();
-    }
-
     @Test
-    void addEvent() {
+    public void addEvent() throws IOException {
         // create a mock input stream for user input
+        calendar = new Calendar();
         InputStream inputStream = new ByteArrayInputStream("Event Name\n2023-03-30\nEvent Description\n".getBytes());
         System.setIn(inputStream);
         calendar = new Calendar();
@@ -40,7 +41,7 @@ class CalendarTest {
     }
 
     @Test
-    void viewEvent() {
+    public void viewEvent() throws IOException {
         calendar = new Calendar();
         InputStream inputStreamTest = new ByteArrayInputStream("Event Name\n2023-03-30\nEvent Description\n".getBytes());
         System.setIn(inputStreamTest);
@@ -62,7 +63,7 @@ class CalendarTest {
     }
 
     @Test
-    void updateEvent() {
+    public void updateEvent() throws IOException {
         InputStream inputStreamTest = new ByteArrayInputStream("Event Name\n2023-03-30\nEvent Description\n".getBytes());
         System.setIn(inputStreamTest);
         calendar = new Calendar();
@@ -84,7 +85,7 @@ class CalendarTest {
     }
 
     @Test
-    void deleteEvent() {
+    public void deleteEvent() throws IOException {
         InputStream inputStream = new ByteArrayInputStream("Event Name\n2023-03-30\nEvent Description\n".getBytes());
         System.setIn(inputStream);
         calendar = new Calendar();
