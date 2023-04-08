@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -46,6 +47,12 @@ public class Controller implements Initializable {
     @FXML private TextField cityNameBox;
     @FXML private ChoiceBox<String> stateChoiceBox;
     @FXML private Button startPointSubmitButton;
+
+    //traffic variables
+    private String selectedAddress;
+    private String selectedStreetName;
+    private String selectedCityName;
+    private String selectedState;
 
     //travel time fields
     @FXML private Label displayTravelTime;
@@ -146,7 +153,8 @@ public class Controller implements Initializable {
 
     }
 
-    public void trafficSubmitButtonPressed(ActionEvent actionEvent){
-
+    public void trafficSubmitButtonPressed(ActionEvent actionEvent) throws IOException {
+        Traffic toBeAdded = new Traffic(Integer.parseInt(addressBox.getText()), streetNameBox.getText(), cityNameBox.getText(), stateChoiceBox.getValue());
+        displayTravelTime.setText(String.valueOf(toBeAdded.findDriveTime())+" minutes");
     }
 }
