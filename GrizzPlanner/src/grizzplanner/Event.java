@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class Event {
+public class Event {
     
     private int id;
     private String name;
@@ -44,5 +44,10 @@ class Event {
     
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "id=" + id + ", name=" + name + ", date=" + date + ", description=" + description;
     }
 }
