@@ -63,12 +63,13 @@ public class ClassEvent {
         return CL_ID;
     }
 
+    @Override
+    public String toString() {
+        return "CL_Name=" + CL_Name + ", CL_Date=" + CL_Date + ", CL_StartTime=" + CL_StartTime + ", CL_EndTime=" + CL_EndTime + ", CL_ID=" + CL_ID;
+    }
 
-/*    @Override
-    public String toString(){
-        String str = "Event: "+getClassEventName()+" From: "+getClassEventStartTime()+" to "+getClassEventEndTime()+" on "+getClassEventDate()+" with ID "+getClassEventID();
-        return str;
-    }*/
+
+
 
 
 }

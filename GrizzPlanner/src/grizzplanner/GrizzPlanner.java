@@ -26,11 +26,11 @@ import javafx.scene.layout.VBox;
 public class GrizzPlanner extends Application{
 
     //@FXML ChoiceBox<String> startTimeHour;
-
+    Calendar cal;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Calendar cal = new Calendar();
+        cal = new Calendar();
 //       cal.addEvent();
 //        cal.addEvent();
 //        for(Event temp: cal.getEvents()){

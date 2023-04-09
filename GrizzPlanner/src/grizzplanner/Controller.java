@@ -1,5 +1,11 @@
 package grizzplanner;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,12 +16,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller implements Initializable {
     //class ID counter
@@ -79,7 +89,12 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //sets up table view for events
+        try {
+            //sets up table view for events
+            pull();
+        } catch (IOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         displayEventNameColumn.setCellValueFactory(new PropertyValueFactory<ClassEvent, String>("CL_Name"));
         displayEventDateColumn.setCellValueFactory(new PropertyValueFactory<ClassEvent, LocalDate>("CL_Date"));
         displayStartTimeColumn.setCellValueFactory(new PropertyValueFactory<ClassEvent, LocalTime>("CL_StartTime"));
@@ -225,7 +240,11 @@ public class Controller implements Initializable {
         System.out.println("displaybox get items:");
         System.out.println(eventDisplayBox.getItems());
 */
-
+        try {
+            save();
+        } catch (IOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void removeEventButtonPressed(ActionEvent actionEvent){
@@ -239,7 +258,11 @@ public class Controller implements Initializable {
         }
 int selectedId = eventDisplayBox.getSelectionModel().getSelectedIndex();
 eventDisplayBox.getItems().remove(selectedId);
-
+        try {
+            save();
+        } catch (IOException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void feedbackYesButtonPressed(ActionEvent actionEvent){
@@ -266,4 +289,64 @@ eventDisplayBox.getItems().remove(selectedId);
         calendarBox.setValue(clickedEvent.getCL_Date());
         removeEventIDBox.setText(String.valueOf(clickedEvent.getCL_ID()));
     }
+    
+        public void pull() throws FileNotFoundException, IOException{
+        String input = "./save.txt";
+        File file = new File(input);
+        InputStream inputStream = new FileInputStream(file);
+        InputStreamReader isReader = new InputStreamReader(inputStream);
+        BufferedReader reader = new BufferedReader(isReader);
+        
+        String str;
+        
+        String CL_Name = "";
+        LocalDate CL_Date = null;
+    //private String CL_Location;
+        LocalTime CL_StartTime = null;
+        LocalTime CL_EndTime = null;
+        int CL_ID = 0;
+        
+        ClassEvent add;
+        
+        while((str = reader.readLine())!= null){
+           String[] split1 = str.split(",");
+            for(String temp: split1){
+//                System.out.println(temp);
+                String[] split2 = temp.split("=");   
+                switch(split2[0].trim()){
+                    case "CL_ID" :
+                        CL_ID = Integer.parseInt(split2[1]);
+                        break;
+                    case "CL_Name" :
+                        CL_Name = split2[1];
+                        break;
+                    case "CL_Date" :
+                        CL_Date = LocalDate.parse(split2[1]);
+                        break;
+                    case "CL_StartTime" :
+                         CL_StartTime = LocalTime.parse(split2[1]);
+                        break;
+                    case "CL_EndTime" :
+                         CL_EndTime = LocalTime.parse(split2[1]);
+                        break;
+                }
+            }
+            
+            add = new ClassEvent(CL_Name, CL_Date, CL_StartTime, CL_EndTime, CL_ID);
+            eventArrayList.add(add);
+            updateEventObservableList();
+//               System.out.println(str);
+        }
+    }
+        
+        private void save() throws IOException{
+        String output = "./save.txt";
+        File file = new  File(output);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        for (ClassEvent temp: eventArrayList){
+            writer.write(temp.toString() + "\n");
+        }
+        writer.close();
+    }
+
 }
