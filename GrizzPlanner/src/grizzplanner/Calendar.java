@@ -57,7 +57,7 @@ public class Calendar {
             if (event.getId() == eventId) {
                 events.remove(i);
                 System.out.println("Event deleted!");
-                save();
+                //save();
                 return;
             }
         }
@@ -72,7 +72,7 @@ public class Calendar {
                 event.setDate(date);
                 event.setDescription(description);
                 System.out.println("Event updated!");
-                save();
+                //save();
                 return;
             }
         }
@@ -91,18 +91,18 @@ public class Calendar {
         Event event = new Event(id, name, date, description);
         events.add(event);
         System.out.println("Event added!");
-        save();
+        //save();
     }
     
-    private void save() throws IOException{
-        String output = "./save.txt";
-        File file = new  File(output);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        for (Event temp: getEvents()){
-            writer.write(temp.toString() + "\n");
-        }
-        writer.close();
-    }
+//    private void save() throws IOException{
+//        String output = "./save.txt";
+//        File file = new  File(output);
+//        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+//        for (Event temp: getEvents()){
+//            writer.write(temp.toString() + "\n");
+//        }
+//        writer.close();
+//    }
     
     
     public List<Event> getEvents() {

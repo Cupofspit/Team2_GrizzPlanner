@@ -37,7 +37,7 @@ public class CalendarTest {
         Event event = events.get(0);
         assertEquals("Event Name", event.getName());
         assertEquals("2023-03-30", event.getDate());
-        //assertEquals("Event Description", event.getDescription());
+        assertEquals("Event Description", event.getDescription());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class CalendarTest {
         InputStream inputStream = new ByteArrayInputStream("Updated Event Name\n2023-03-28\nUpdated Event Description\n".getBytes());
         System.setIn(inputStream);
 
-        //calendar.updateEvent(1, "Updated Event Name", "2023-03-28", "Updated Event Description");
+        calendar.updateEvent(1, "Updated Event Name", "2023-03-28", "Updated Event Description");
 
         List<Event> events = calendar.getEvents();
         assertEquals(1, events.size());
@@ -81,7 +81,7 @@ public class CalendarTest {
         Event event = events.get(0);
         assertEquals("Updated Event Name", event.getName());
         assertEquals("2023-03-28", event.getDate());
-        //assertEquals("Updated Event Description", event.getDescription());
+        assertEquals("Updated Event Description", event.getDescription());
     }
 
     @Test
@@ -101,6 +101,6 @@ public class CalendarTest {
         assertEquals(1, event.getId());
         assertEquals("Event Name", event.getName());
         assertEquals("2023-03-30", event.getDate());
-        //assertEquals("Event Description", event.getDescription());
+        assertEquals("Event Description", event.getDescription());
     }
 }

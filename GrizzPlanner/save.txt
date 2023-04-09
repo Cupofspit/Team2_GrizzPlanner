@@ -1,2 +1,1 @@
-CL_Name=Testing, CL_Date=2023-04-10, CL_StartTime=06:20, CL_EndTime=09:26, CL_ID=1
-CL_Name=Testing2, CL_Date=2023-04-11, CL_StartTime=06:20, CL_EndTime=09:26, CL_ID=52
+
