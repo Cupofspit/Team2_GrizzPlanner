@@ -46,39 +46,38 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="948.0">
                                     <children>
                                         <DatePicker fx:id="calendarBox" layoutX="16.0" layoutY="161.0" prefHeight="32.0" prefWidth="275.0" />
-                                        <TableView fx:id="eventDisplayBox" layoutX="326.0" layoutY="42.0" onMouseClicked="#boxClicked" prefHeight="442.0" prefWidth="576.0">
+                                        <TableView fx:id="eventDisplayBox" layoutX="326.0" layoutY="60.0" onMouseClicked="#boxClicked" prefHeight="424.0" prefWidth="576.0">
                                             <columns>
                                                 <TableColumn fx:id="displayEventNameColumn" prefWidth="189.0" text="Event Name" />
-                                                <TableColumn fx:id="displayEventDateColumn" minWidth="0.0" prefWidth="75.0" text="Date" />
-                                                <TableColumn fx:id="displayStartTimeColumn" prefWidth="98.0" text="Start Time" />
-                                                <TableColumn fx:id="displayEndTimeColumn" prefWidth="98.0" text="End Time" />
-                                                <TableColumn fx:id="displayEventIDColumn" prefWidth="115.0" text="Event ID" />
+                                                <TableColumn fx:id="displayEventDateColumn" minWidth="0.0" prefWidth="116.0" text="Date" />
+                                                <TableColumn fx:id="displayStartTimeColumn" prefWidth="93.0" text="Start Time" />
+                                                <TableColumn fx:id="displayEndTimeColumn" prefWidth="90.0" text="End Time" />
+                                                <TableColumn fx:id="displayEventIDColumn" prefWidth="87.0" text="Event ID" />
                                             </columns>
                                         </TableView>
                                         <ChoiceBox fx:id="startTimeHour" layoutX="16.0" layoutY="232.0" prefHeight="31.0" prefWidth="100.0" />
                                         <ChoiceBox fx:id="startTimeMinute" layoutX="131.0" layoutY="232.0" prefHeight="31.0" prefWidth="100.0" />
                                         <ChoiceBox fx:id="startTimeAMPM" layoutX="244.0" layoutY="232.0" prefHeight="31.0" prefWidth="50.0" />
                                         <Separator layoutX="16.0" layoutY="52.0" prefHeight="18.0" prefWidth="275.0" />
-                                        <Label layoutX="16.0" layoutY="36.0" prefHeight="21.0" prefWidth="74.0" text="Add Event" />
+                                        <Label layoutX="16.0" layoutY="36.0" prefHeight="21.0" prefWidth="98.0" text="Modify Events" />
                                         <ChoiceBox fx:id="endTimeHour" layoutX="16.0" layoutY="301.0" prefHeight="31.0" prefWidth="100.0" />
                                         <ChoiceBox fx:id="endTimeMinute" layoutX="131.0" layoutY="301.0" prefHeight="31.0" prefWidth="100.0" />
                                         <ChoiceBox fx:id="endTimeAMPM" layoutX="244.0" layoutY="301.0" prefHeight="31.0" prefWidth="50.0" />
                                         <Label layoutX="16.0" layoutY="132.0" prefHeight="21.0" prefWidth="45.0" text="Date" />
-                                        <Button fx:id="addEventButton" layoutX="240.0" layoutY="91.0" mnemonicParsing="false" onAction="#addEventButtonPressed" text="Add" />
-                                        <TextField fx:id="addEventNameBox" layoutX="16.0" layoutY="91.0" prefHeight="31.0" prefWidth="194.0" />
+                                        <Button fx:id="addEventButton" layoutX="176.0" layoutY="91.0" mnemonicParsing="false" onAction="#addEventButtonPressed" prefHeight="31.0" prefWidth="115.0" text="Add / Update" />
+                                        <TextField fx:id="addEventNameBox" layoutX="16.0" layoutY="91.0" prefHeight="31.0" prefWidth="144.0" />
                                         <Label layoutX="16.0" layoutY="202.0" text="Start Time" />
                                         <Label layoutX="16.0" layoutY="273.0" text="End Time" />
                                         <Label layoutX="16.0" layoutY="70.0" text="Event Name" />
-                                        <Label layoutX="326.0" layoutY="14.0" prefHeight="32.0" prefWidth="268.0" text="Events currently on this schedule:">
+                                        <Label layoutX="326.0" layoutY="31.0" prefHeight="32.0" prefWidth="268.0" text="Events currently on this schedule:">
                                             <font>
                                                 <Font size="18.0" />
                                             </font>
                                         </Label>
-                                        <Separator layoutX="16.0" layoutY="371.0" prefHeight="18.0" prefWidth="275.0" />
-                                        <Label layoutX="16.0" layoutY="350.0" prefHeight="21.0" prefWidth="103.0" text="Remove Event" />
-                                        <TextField fx:id="removeEventIDBox" layoutX="16.0" layoutY="418.0" prefHeight="31.0" prefWidth="104.0" />
-                                        <Label layoutX="16.0" layoutY="389.0" text="Event ID" />
-                                        <Button fx:id="removeEventButton" layoutX="149.0" layoutY="418.0" mnemonicParsing="false" onAction="#removeEventButtonPressed" text="Remove" />
+                                        <TextField fx:id="removeEventIDBox" layoutX="16.0" layoutY="372.0" prefHeight="31.0" prefWidth="142.0" />
+                                        <Label layoutX="16.0" layoutY="344.0" text="Event ID (#)" />
+                                        <Button fx:id="removeEventButton" layoutX="174.0" layoutY="372.0" mnemonicParsing="false" onAction="#removeEventButtonPressed" prefHeight="31.0" prefWidth="127.0" text="Remove" />
+                                        <Label fx:id="statusLabel" layoutX="16.0" layoutY="436.0" prefHeight="48.0" prefWidth="286.0" text="" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -137,6 +136,7 @@
                                         <Label fx:id="lotTwoCapacityLabel" layoutX="724.0" layoutY="115.0" prefHeight="32.0" prefWidth="104.0" text="0/0 spots" />
                                         <Label fx:id="lotThreeCapacityLabel" layoutX="724.0" layoutY="144.0" prefHeight="32.0" prefWidth="104.0" text="0/0 spots" />
                                         <Label fx:id="lotFourCapacityLabel" layoutX="724.0" layoutY="175.0" prefHeight="32.0" prefWidth="104.0" text="0/0 spots" />
+                                        <Label fx:id="feedbackReceivedLabel" layoutX="646.0" layoutY="450.0" prefHeight="21.0" prefWidth="248.0" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
@@ -150,10 +150,10 @@
                                             </font>
                                         </Label>
                                         <Label layoutX="14.0" layoutY="70.0" text="CSI 3370 Winter 2023 Project" />
-                                        <Label layoutX="14.0" layoutY="90.0" text="Ashton, Murphy, Andrea, Graham" />
-                                        <Label layoutX="14.0" layoutY="110.0" text="Traffic API provided by TomTom" />
-                                        <Label layoutX="14.0" layoutY="130.0" text="Satellite imagery provided by Google" />
-                                        <Label layoutX="14.0" layoutY="150.0" text="GUI designed with Gluon SceneBuilder for JavaFX" />
+                                        <Label layoutX="14.0" layoutY="91.0" text="Ashton, Murphy, Andrea, Graham" />
+                                        <Label layoutX="14.0" layoutY="112.0" text="Traffic API provided by TomTom" />
+                                        <Label layoutX="14.0" layoutY="133.0" text="Satellite imagery provided by Google" />
+                                        <Label layoutX="14.0" layoutY="154.0" text="UI deisgned using Gluon SceneBuilder" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>

@@ -46,12 +46,9 @@ public class Controller implements Initializable {
     @FXML private ChoiceBox<String> endTimeAMPM;
     @FXML private DatePicker calendarBox;
 
+
     //add event variables
     private ArrayList<ClassEvent> eventArrayList = new ArrayList<>();
-    private String selectedEventName;
-    private LocalTime selectedStartTime;
-    private LocalTime selectedEndTime;
-    private LocalDate selectedDate;
 
     //event display fields
     @FXML private TableView<ClassEvent> eventDisplayBox;
@@ -71,12 +68,6 @@ public class Controller implements Initializable {
     @FXML private ChoiceBox<String> stateChoiceBox;
     @FXML private Button startPointSubmitButton;
 
-    //traffic variables
-    private String selectedAddress;
-    private String selectedStreetName;
-    private String selectedCityName;
-    private String selectedState;
-
     //travel time fields
     @FXML private Label displayTravelTime;
 
@@ -85,6 +76,10 @@ public class Controller implements Initializable {
     @FXML private Label lotTwoCapacityLabel;
     @FXML private Label lotThreeCapacityLabel;
     @FXML private Label lotFourCapacityLabel;
+
+    //feedback fields
+    @FXML private Label feedbackReceivedLabel;
+
 
 
     @Override
@@ -147,7 +142,7 @@ public class Controller implements Initializable {
     }
 
 
-    //method to make start time localtime format
+/*    //method to make start time localtime format
     public void convertStartTime(){
         try {
             int hour = Integer.parseInt(startTimeHour.getValue());
@@ -157,9 +152,9 @@ public class Controller implements Initializable {
         catch(Exception e) {
             System.out.println(e);
         }
-    }
+    }*/
 
-    //method to make end time localtime format
+/*    //method to make end time localtime format
     public void convertEndTime(){
         try {
             int hour = Integer.parseInt(endTimeHour.getValue());
@@ -169,7 +164,7 @@ public class Controller implements Initializable {
         catch(Exception e) {
             System.out.println(e);
         }
-    }
+    }*/
 
     // method to update the eventObservableList with the contents of eventArrayList
     private void updateEventObservableList() {
@@ -178,73 +173,39 @@ public class Controller implements Initializable {
 
 
     public void addEventButtonPressed(ActionEvent actionEvent) throws IOException {
-        ClassEvent addedEvent = new ClassEvent(addEventNameBox.getText(), calendarBox.getValue(), LocalTime.of(Integer.parseInt((startTimeHour.getValue())), Integer.parseInt(startTimeMinute.getValue())), LocalTime.of(Integer.parseInt((endTimeHour.getValue())), Integer.parseInt(endTimeMinute.getValue())), r.nextInt(100));
-        //ClassEvent addedEvent = new ClassEvent("Name", LocalDate.now(), LocalTime.now(), LocalTime.now(), 123);
-        ObservableList<ClassEvent> eventObservableList = eventDisplayBox.getItems();
-        eventObservableList.add(addedEvent);
-        eventDisplayBox.setItems(eventObservableList);
-        eventArrayList.add(addedEvent);
+        boolean inArr = false;
+        ClassEvent update = null;
 
-        // update the TableView
-        updateEventObservableList();
-
-        //convertStartTime();
-        //convertEndTime();
-        //selectedDate = calendarBox.getValue();
-        //selectedEventName = addEventNameBox.getText();
-        //ID = r.nextInt(10000);
-        //ClassEvent toBeAdded = new ClassEvent(selectedEventName,  selectedDate, selectedStartTime, selectedEndTime,ID);
-        //eventArrayList.add(toBeAdded);
-        //ClassEvent testEvent = new ClassEvent("Name", LocalTime.now(), LocalTime.now(), LocalDate.now(), 1);
-        //eventObservableList.add(toBeAdded);
-        //eventObservableList.add(testEvent);
-        //System.out.println(toBeAdded.toString());
-        //System.out.println(eventObservableList);
-       // eventDisplayBox.getItems().addAll(eventObservableList);
-
-        //debug
-/*
-        System.out.println("getters from classevent class");
-        System.out.println(toBeAdded.getClassEventName());
-        System.out.println(toBeAdded.getClassEventDate());
-        System.out.println(toBeAdded.getClassEventStartTime());
-        System.out.println(toBeAdded.getClassEventEndTime());
-        System.out.println(toBeAdded.getClassEventID());
-
-        System.out.println("local variables");
-        System.out.println(selectedEventName);
-        System.out.println(selectedStartTime);
-        System.out.println(selectedEndTime);
-        System.out.println(selectedDate);
-        System.out.println(ID);
-
-        System.out.println("items in array list");
-        for(int i = 0; i<eventArrayList.size(); i++){
-            System.out.println(eventArrayList.get(i).getClassEventName());
-            System.out.println(eventArrayList.get(i).getClassEventDate());
-            System.out.println(eventArrayList.get(i).getClassEventStartTime());
-            System.out.println(eventArrayList.get(i).getClassEventEndTime());
-            System.out.println(eventArrayList.get(i).getClassEventID());
+        for (ClassEvent temp: eventArrayList){
+            if (Integer.parseInt(removeEventIDBox.getText()) == temp.getCL_ID() && inArr == false){
+                inArr = true;
+                update = temp;
+                System.out.println("looped");
+            }
         }
 
-        System.out.println("items in observable list");
-        for(int i = 0; i<eventObservableList.size(); i++){
-            System.out.println(eventObservableList.get(i).getClassEventName());
-            System.out.println(eventObservableList.get(i).getClassEventDate());
-            System.out.println(eventObservableList.get(i).getClassEventStartTime());
-            System.out.println(eventObservableList.get(i).getClassEventEndTime());
-            System.out.println(eventObservableList.get(i).getClassEventID());
+        if (inArr == true){
+            update.setCL_Name(addEventNameBox.getText());
+            update.setCL_Date(calendarBox.getValue());
+            update.setCL_StartTime(LocalTime.of(Integer.parseInt((startTimeHour.getValue())), Integer.parseInt(startTimeMinute.getValue())));
+            update.setCL_EndTime(LocalTime.of(Integer.parseInt((endTimeHour.getValue())), Integer.parseInt(endTimeMinute.getValue())));
+            update.setCL_ID(Integer.parseInt(removeEventIDBox.getText()));
+            updateEventObservableList();
+        }else{
+
+            ClassEvent addedEvent = new ClassEvent(addEventNameBox.getText(), calendarBox.getValue(), LocalTime.of(Integer.parseInt((startTimeHour.getValue())), Integer.parseInt(startTimeMinute.getValue())), LocalTime.of(Integer.parseInt((endTimeHour.getValue())), Integer.parseInt(endTimeMinute.getValue())), Integer.parseInt( removeEventIDBox.getText()));
+            ObservableList<ClassEvent> eventObservableList = eventDisplayBox.getItems();
+            eventObservableList.add(addedEvent);
+            eventDisplayBox.setItems(eventObservableList);
+            eventArrayList.add(addedEvent);
         }
 
-
-        System.out.println("displaybox get items:");
-        System.out.println(eventDisplayBox.getItems());
-*/
         try {
             save();
         } catch (IOException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public void removeEventButtonPressed(ActionEvent actionEvent){
@@ -266,11 +227,11 @@ eventDisplayBox.getItems().remove(selectedId);
     }
 
     public void feedbackYesButtonPressed(ActionEvent actionEvent){
-
+        feedbackReceivedLabel.setText("Thank you for the feedback!");
     }
 
     public void feedbackNoButtonPressed(ActionEvent actionEvent){
-
+        feedbackReceivedLabel.setText("Thank you for the feedback!");
     }
 
     public void trafficSubmitButtonPressed(ActionEvent actionEvent) throws IOException {
