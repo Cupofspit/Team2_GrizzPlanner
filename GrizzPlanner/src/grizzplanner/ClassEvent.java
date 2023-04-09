@@ -7,14 +7,14 @@ import java.time.LocalTime;
 public class ClassEvent {
 
     private String CL_Name;
-    private String CL_Location;
+    private LocalDate CL_Date;
+    //private String CL_Location;
     private LocalTime CL_StartTime;
     private LocalTime CL_EndTime;
-    private LocalDate CL_Date;
     private int CL_ID;
 
 
-    public ClassEvent(String CL_Name, LocalTime CL_StartTime, LocalTime CL_EndTime, LocalDate CL_Date, int CL_ID){
+    public ClassEvent(String CL_Name, LocalDate CL_Date, LocalTime CL_StartTime, LocalTime CL_EndTime, int CL_ID){
         this.CL_Name = CL_Name;
         //this.CL_Location = CL_Location;
         this.CL_StartTime = CL_StartTime;
@@ -23,58 +23,52 @@ public class ClassEvent {
         this.CL_ID = CL_ID;
     }
 
-    public void setClassEventName(String name){
+    public void setCL_Name(String name){
         CL_Name = name;
     }
 
-    public String getClassEventName(){
+    public String getCL_Name(){
         return CL_Name;
     }
 
- /*   public void setClassEventLocation(String loc){
-        CL_Location = loc;
-    }*/
-
-/*    public String getClassEventLocation(){
-        return CL_Location;
-    }*/
-
-    public void setClassEventStartTime(LocalTime time){
+    public void setCL_StartTime(LocalTime time){
         CL_StartTime = time;
     }
 
-    public LocalTime getClassEventStartTime(){
+    public LocalTime getCL_StartTime(){
         return CL_StartTime;
     }
 
-    public void setClassEventEndTime(LocalTime time){
+    public void setCL_EndTime(LocalTime time){
         CL_EndTime = time;
     }
 
-    public LocalTime getClassEventEndTime(){
+    public LocalTime getCL_EndTime(){
         return CL_EndTime;
     }
 
-    public void setClassEventDate(LocalDate date){
-        CL_Date = date;
-    }
-
-    public LocalDate getClassEventDate(){
+    public LocalDate getCL_Date(){
         return CL_Date;
     }
 
-    public void setClassEventID(int ID){
+    public void setCL_Date(LocalDate date){
+        CL_Date = date;
+    }
+
+    public void setCL_ID(int ID){
         CL_ID = ID;
     }
 
-    public int getClassEventID(){
+    public int getCL_ID(){
         return CL_ID;
     }
 
+
+/*    @Override
     public String toString(){
-        String str = "Event: "+getClassEventName()+"    From: "+getClassEventStartTime()+" to "+getClassEventEndTime()+" on "+getClassEventDate()+" with ID "+getClassEventID();
+        String str = "Event: "+getClassEventName()+" From: "+getClassEventStartTime()+" to "+getClassEventEndTime()+" on "+getClassEventDate()+" with ID "+getClassEventID();
         return str;
-    }
+    }*/
 
 
 }
